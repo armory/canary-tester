@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 GIT_HASH=$(git rev-parse HEAD | cut -c -7)
 VERSION=0.${BUILD_NUMBER}.0-h${BUILD_NUMBER}.${GIT_HASH}
@@ -14,4 +14,4 @@ BINTRAY_URL=https://api.bintray.com/content/armory/${REPO}
 
 curl -T ./build/distributions/${DEB_FILE} \
   -u${BINTRAY_USER}:${BINTRAY_APIKEY} \
-   "${BINTRAY_URL}/${APP_NAME}/${VERSION}/${DEB_FILE};${METADATA}"
+   "${BINTRAY_URL}/canary-tester/${VERSION}/${DEB_FILE};${METADATA}"
