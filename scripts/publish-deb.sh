@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 GIT_HASH=$(git rev-parse HEAD | cut -c -7)
 VERSION=0.${BUILD_NUMBER}.0-h${BUILD_NUMBER}.${GIT_HASH}
