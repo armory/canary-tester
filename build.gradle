@@ -1,0 +1,33 @@
+buildscript {
+  repositories {
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+  dependencies {
+       classpath 'com.netflix.nebula:gradle-ospackage-plugin:4.3.0'
+   }
+}
+
+apply plugin: 'nebula.ospackage'
+
+project.buildDir = 'build/'
+
+ospackage {
+  def buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
+  def branchName = System.getenv("BRANCH_NAME") ?: "dev"
+
+  os = LINUX
+  packageName = "canary-tester"
+  version = "0.${buildNumber}.0"
+  release = "h${buildNumber}.${branchName}"
+  user = 'root'
+  permissionGroup = 'root'
+
+  from('build/canary-tester') {
+    into '/usr/local/bin/canary-tester'
+  }
+
+  from('scripts/canary-tester.conf') {
+    into '/etc/init/'
+  }
+}
