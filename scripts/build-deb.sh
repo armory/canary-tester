@@ -15,3 +15,6 @@ docker run --rm \
   -w="/app" \
   frekele/gradle:2.12-jdk8 \
   gradle -b /app/build.gradle buildDeb
+
+echo "Built:"
+ls -ahl build/distributions/
