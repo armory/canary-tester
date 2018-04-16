@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 GIT_HASH=$(git rev-parse HEAD | cut -c -7)
-VERSION=0.${BUILD_NUMBER}.0-h${BUILD_NUMBER}.${GIT_HASH}
+VERSION=0.${BUILD_NUMBER:-0}.0-h${BUILD_NUMBER:-0}.${GIT_HASH}
 DEB_FILE=canary-tester_${VERSION}_all.deb
 METADATA="deb_distribution=trusty;deb_component=main;publish=1;deb_architecture=i386,amd64"
 
