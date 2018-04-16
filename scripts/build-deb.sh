@@ -9,7 +9,7 @@ docker run -v "$(pwd):/app" -w="/app" golang:1.9 \
 
 export GIT_HASH=$(git rev-parse HEAD | cut -c -7)
 docker run --rm \
-  -e "BUILD_NUMBER=${CI_BUILD_NUMBER}" \
+  -e "BUILD_NUMBER=${BUILD_NUMBER}" \
   -e "BRANCH_NAME=$(echo ${GIT_HASH} | tr -d -- -)" \
   -v $(pwd):/app \
   -w="/app" \
