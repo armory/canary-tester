@@ -1,6 +1,7 @@
 #!/bin/bash
 
-DEB_FILE=${APP_NAME}_${VERSION}_all.deb
+VERSION=0.${CI_BUILD_NUMBER}.0-h${CI_BUILD_NUMBER}.${GIT_HASH}
+DEB_FILE=canary-test_${VERSION}_all.deb
 METADATA="deb_distribution=trusty;deb_component=main;publish=1;deb_architecture=i386,amd64"
 
 REPO="debians-dev"
