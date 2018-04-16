@@ -7,7 +7,7 @@ mkdir -p build/
 docker run -v "$(pwd):/app" -w="/app" golang:1.9 \
   bash -c "go build -o build/canary-tester cmd/canary-tester.go"
 
-export GIT_HASH=$(git rev-parse HEAD | cut -c -7)
+GIT_HASH=$(git rev-parse HEAD | cut -c -7)
 docker run --rm \
   -e "BUILD_NUMBER=${BUILD_NUMBER}" \
   -e "BRANCH_NAME=$(echo ${GIT_HASH} | tr -d -- -)" \
