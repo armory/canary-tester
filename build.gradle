@@ -24,7 +24,7 @@ ospackage {
   permissionGroup = 'root'
 
   from('build/canary-tester') {
-    into '/usr/local/bin/canary-tester'
+    into '/usr/local/bin/'
   }
 
   from('scripts/canary-tester.conf') {
