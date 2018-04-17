@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/DataDog/datadog-go/statsd"
 )
@@ -37,9 +38,17 @@ func main() {
 			w.WriteHeader(200)
 		}
 	})
-
+	go heartBeat()
 	http.ListenAndServe(":8080", nil)
 	fmt.Println("Done.")
+}
+
+func heartBeat() {
+	for {
+		resp, _ := http.Get("http://localhost:8080/")
+		resp.Body.Close()
+		time.Sleep(10 * time.Second)
+	}
 }
 
 func shouldFail() bool {
