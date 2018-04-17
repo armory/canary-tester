@@ -5,7 +5,7 @@ rm -dfr build/
 mkdir -p build/
 
 docker run -v "$(pwd):/app" -w="/app" golang:1.9 \
-  bash -c "go build -o build/canary-tester cmd/canary-tester.go"
+  bash -c "go get github.com/DataDog/datadog-go/statsd && go build -o build/canary-tester cmd/canary-tester.go"
 
 GIT_HASH=$(git rev-parse HEAD | cut -c -7)
 docker run --rm \

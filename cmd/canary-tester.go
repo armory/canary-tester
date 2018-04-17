@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 	fmt.Println("Canary Tester started.")
+	c, _ := statsd.New("127.0.0.1:8125")
+	c.Namespace = "canarytester."
 	fail := shouldFail()
 	http.HandleFunc("/fail/true", func(w http.ResponseWriter, r *http.Request) {
 		fail = true
@@ -26,8 +30,10 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received", r)
 		if fail {
+			c.Incr("http_500", nil, 1)
 			w.WriteHeader(500)
 		} else {
+			c.Incr("http_200", nil, 1)
 			w.WriteHeader(200)
 		}
 	})
