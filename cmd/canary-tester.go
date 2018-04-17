@@ -19,6 +19,10 @@ func main() {
 		fmt.Println("All responses from now on will be 500 errors.")
 		fail = false
 	})
+	http.HandleFunc("/healthcheck", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Received", r)
+		w.WriteHeader(200)
+	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received", r)
 		if fail {
@@ -27,6 +31,7 @@ func main() {
 			w.WriteHeader(200)
 		}
 	})
+
 	http.ListenAndServe(":8080", nil)
 	fmt.Println("Done.")
 }
