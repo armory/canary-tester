@@ -26,7 +26,7 @@ func setRootHandlers() {
 	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Received", r)
-		w.Write([]byte(`{"status":"ok"`))
+		w.Write([]byte(`{"status":"ok"}`))
 	})
 }
 
